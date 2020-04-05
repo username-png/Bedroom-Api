@@ -8,13 +8,12 @@ module.exports={
         await db.insert({
             user_name
         }).into('user');
-        res.send()
+        res.json({sucess:true});
     },
 
     async index(req,res){
         const {orderBy = 'user_id'} = url.parse(req.url,true).query ;
-        console.log(userId)
-        await db.select()
+        await db.select('user_name')
         .from('user')
         .orderBy(orderBy)
         .then(function(data){
@@ -25,7 +24,7 @@ module.exports={
     async user(req,res){
         await db('user')
         .where({user_id: req.params.id})
-        .select()
+        .select('user_name')
         .then(function(data){
             res.send(data);
         });
